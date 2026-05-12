@@ -1,0 +1,2 @@
+CREATE DATABASE BackEndNodeJS;
+USE BackEndNodeJS;
