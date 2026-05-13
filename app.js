@@ -3,7 +3,8 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const routes = require('./routes/authRoutes');
 const { connectDB } = require('./database/db');
-
+const path = require('node:path');
+const FRONTEND_DIR = path.join(__dirname, './frontend');
 dotenv.config();
 
 const app = express();
@@ -15,10 +16,14 @@ app.use(express.urlencoded({ extended: true }));
 
 // Conectar a base de datos
 connectDB();
-
+//
+app.use(express.static(FRONTEND_DIR));
 // Rutas
 app.use('/api', routes);
-
+//
+app.get('/', (req, res) => {
+  res.sendFile(path.join(FRONTEND_DIR, 'index.html'));
+});
 // Manejo de rutas no encontradas
 app.use((req, res) => {
   res.status(404).json({

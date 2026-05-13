@@ -10,7 +10,7 @@ const {
 const { protect, authorize } = require('../middleware/auth');
 
 // Rutas públicas
-router.get('/', home);
+//router.get('/', home);
 router.post('/auth/register', register);
 router.post('/auth/login', login);
 

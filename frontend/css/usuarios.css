@@ -1,0 +1,255 @@
+.users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.users-header h2 {
+    color: #1976D2;
+    font-size: 24px;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid #E3F2FD;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.users-table thead {
+    background: #E3F2FD;
+}
+
+.users-table th {
+    padding: 15px;
+    text-align: left;
+    color: #1976D2;
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 2px solid #BBDEFB;
+}
+
+.users-table td {
+    padding: 12px 15px;
+    color: #42A5F5;
+    border-bottom: 1px solid #E3F2FD;
+}
+
+.users-table tbody tr:hover {
+    background: #F5F9FF;
+}
+
+.loading-text {
+    text-align: center;
+    color: #64B5F6;
+    padding: 40px;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-admin {
+    background: #E3F2FD;
+    color: #1976D2;
+}
+
+.badge-user {
+    background: #F5F5F5;
+    color: #757575;
+}
+
+.badge-active {
+    background: #E8F5E9;
+    color: #4CAF50;
+}
+
+.badge-inactive {
+    background: #FFEBEE;
+    color: #EF5350;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-edit, .btn-delete {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-edit {
+    background: #E3F2FD;
+    color: #1976D2;
+}
+
+.btn-edit:hover {
+    background: #BBDEFB;
+    transform: translateY(-1px);
+}
+
+.btn-delete {
+    background: #FFEBEE;
+    color: #EF5350;
+}
+
+.btn-delete:hover {
+    background: #FFCDD2;
+    transform: translateY(-1px);
+}
+
+/* Modales */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.delete-modal {
+    max-width: 400px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 2px solid #E3F2FD;
+}
+
+.modal-header h3 {
+    color: #1976D2;
+    font-size: 20px;
+}
+
+.close, .close-delete {
+    color: #64B5F6;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover, .close-delete:hover {
+    color: #1976D2;
+}
+
+.modal-body {
+    padding: 20px 25px;
+}
+
+.modal-body p {
+    color: #42A5F5;
+    margin: 10px 0;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px 25px;
+    border-top: 1px solid #E3F2FD;
+}
+
+.btn-danger {
+    background: #EF5350;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    background: #E53935;
+    transform: translateY(-1px);
+}
+
+#userForm {
+    padding: 20px 25px;
+}
+
+@media (max-width: 768px) {
+    .users-table th,
+    .users-table td {
+        padding: 10px;
+        font-size: 12px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .modal-content {
+        margin: 20% auto;
+        width: 95%;
+    }
+}
+
+@media (max-width: 480px) {
+    .users-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .users-header button {
+        width: 100%;
+    }
+}
+
+select {
+  border: 2px solid #dddddd;
+  background: #eeeeee;
+  padding: 10px;
+  transition: 0.4s;
+}
+
+select:hover,
+select:focus {
+  background: #dddddd;
+}

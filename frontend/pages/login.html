@@ -1,0 +1,100 @@
+<div class="container">
+    <div class="form-container fade-in" id="loginContainer">
+        <div class="logo">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="#4A90E2"/>
+            </svg>
+            <h1>Bienvenido</h1>
+            <p>Inicia sesión para continuar</p>
+        </div>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="loginEmail">Correo electrónico</label>
+                <input 
+                    type="email" 
+                    id="loginEmail" 
+                    name="email" 
+                    placeholder="tuejemplo@email.com"
+                    required
+                >
+            </div>
+            
+            <div class="input-group">
+                <label for="loginPassword">Contraseña</label>
+                <input 
+                    type="password" 
+                    id="loginPassword" 
+                    name="password" 
+                    placeholder="••••••"
+                    required
+                >
+            </div>
+            
+            <button type="submit" class="btn-primary">Iniciar Sesión</button>
+        </form>
+        
+        <div class="footer">
+            <p>¿No tienes una cuenta? 
+                <a href="#" id="showRegister">Regístrate aquí</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="form-container fade-in" id="registerContainer" style="display: none;">
+        <div class="logo">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#4A90E2"/>
+            </svg>
+            <h1>Crear Cuenta</h1>
+            <p>Regístrate para comenzar</p>
+        </div>
+        
+        <form id="registerForm">
+            <div class="input-group">
+                <label for="regName">Nombre completo</label>
+                <input 
+                    type="text" 
+                    id="regName" 
+                    name="name" 
+                    placeholder="Juan Pérez"
+                    required
+                >
+            </div>
+            
+            <div class="input-group">
+                <label for="regEmail">Correo electrónico</label>
+                <input 
+                    type="email" 
+                    id="regEmail" 
+                    name="email" 
+                    placeholder="tuejemplo@email.com"
+                    required
+                >
+            </div>
+            
+            <div class="input-group">
+                <label for="regPassword">Contraseña</label>
+                <input 
+                    type="password" 
+                    id="regPassword" 
+                    name="password" 
+                    placeholder="••••••"
+                    required
+                >
+            </div>
+            
+            <button type="submit" class="btn-primary">Registrarse</button>
+        </form>
+        
+        <div class="footer">
+            <p>¿Ya tienes una cuenta? 
+                <a href="#" id="showLogin">Inicia sesión aquí</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast">
+    <span id="toastMessage"></span>
+</div>

@@ -33,10 +33,10 @@ const home = (req, res) => {
 // @access  Public
 const register = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
-
+    const { name, lastName, email, password, role } = req.body;
+    // console.log(req.body);
     // Validar campos requeridos
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !lastName) {
       return res.status(400).json({
         success: false,
         message: 'Por favor proporcione todos los campos requeridos'
@@ -55,6 +55,7 @@ const register = async (req, res) => {
     // Crear usuario
     const user = await User.create({
       name,
+      lastName,
       email,
       password,
       role: role || 'user'
@@ -69,6 +70,7 @@ const register = async (req, res) => {
       user: {
         id: user.id,
         name: user.name,
+        lastName: user.lastName,
         email: user.email,
         role: user.role
       }

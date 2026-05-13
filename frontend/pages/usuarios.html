@@ -1,0 +1,107 @@
+<div class="dashboard-container fade-in">
+    <div class="dashboard-header">
+        <div class="user-info">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#4A90E2"/>
+            </svg>
+            <div>
+                <h3 id="userName"></h3>
+                <p id="userEmail"></p>
+            </div>
+        </div>
+        <div class="header-buttons">
+            <button id="showDashboardBtn" class="btn-secondary">🏠 Inicio</button>
+            <button id="logoutBtn" class="btn-logout">Cerrar Sesión</button>
+        </div>
+    </div>
+    
+    <div class="users-header">
+        <h2>Gestión de Usuarios</h2>
+        <button id="addUserBtn" class="btn-primary btn-small">+ Agregar Usuario</button>
+    </div>
+
+    <div class="table-container">
+        <table class="users-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="usersTableBody">
+                <tr>
+                    <td colspan="6" class="loading-text">Cargando usuarios...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modales -->
+<div id="userModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">Agregar Usuario</h3>
+            <span class="close">&times;</span>
+        </div>
+        <form id="userForm">
+            <input type="hidden" id="userId">
+            <div class="input-group">
+                <label for="userName">Nombre completo</label>
+                <input type="text" id="userName" name="name" required>
+            </div>
+            <div class="input-group">
+                <label for="userEmail">Correo electrónico</label>
+                <input type="email" id="userEmail" name="email" required>
+            </div>
+            <div class="input-group" id="passwordField">
+                <label for="userPassword">Contraseña</label>
+                <input type="password" id="userPassword" name="password">
+                <small id="passwordHelp">Dejar en blanco para mantener la contraseña actual</small>
+            </div>
+            <div class="input-group">
+                <label for="userRole">Rol</label>
+                <select id="userRole" name="role">
+                    <option value="user">Usuario</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="userStatus">Estado</label>
+                <select id="userStatus" name="status">
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
+                </select>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" class="btn-secondary" id="cancelModalBtn">Cancelar</button>
+                <button type="submit" class="btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="deleteModal" class="modal">
+    <div class="modal-content delete-modal">
+        <div class="modal-header">
+            <h3>Confirmar Eliminación</h3>
+            <span class="close-delete">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+            <p><strong id="deleteUserName"></strong></p>
+        </div>
+        <div class="modal-buttons">
+            <button type="button" class="btn-secondary" id="cancelDeleteBtn">Cancelar</button>
+            <button type="button" class="btn-danger" id="confirmDeleteBtn">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast">
+    <span id="toastMessage"></span>
+</div>

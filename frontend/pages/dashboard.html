@@ -1,0 +1,38 @@
+<div class="dashboard-container fade-in">
+    <div class="dashboard-header">
+        <div class="user-info">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#4A90E2"/>
+            </svg>
+            <div>
+                <h3 id="userName"></h3>
+                <p id="userEmail"></p>
+            </div>
+        </div>
+        <div class="header-buttons">
+            <button id="showUsersBtn" class="btn-secondary">📋 Usuarios</button>
+            <button id="showDashboardBtn" class="btn-secondary">🏠 Inicio</button>
+            <button id="logoutBtn" class="btn-logout">Cerrar Sesión</button>
+        </div>
+    </div>
+    
+    <div id="dashboardContent">
+        <div class="dashboard-view" id="homeView">
+            <div class="welcome-card">
+                <h2>¡Bienvenido!</h2>
+                <p>Has iniciado sesión correctamente.</p>
+            </div>
+            
+            <div class="info-card">
+                <h3>Información de sesión</h3>
+                <p><strong>Rol:</strong> <span id="userRole"></span></p>
+                <p><strong>ID de usuario:</strong> <span id="userId"></span></p>
+                <p><strong>Email:</strong> <span id="userEmailInfo"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast">
+    <span id="toastMessage"></span>
+</div>
