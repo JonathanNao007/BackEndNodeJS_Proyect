@@ -11,14 +11,14 @@ const Lotes = sequelize.define('Lotes', {
     type: DataTypes.BIGINT,
     allowNull: false,
     validate:{
-        isInt
+        isInt:true
     }
   },
   claveProducto: {
     type: DataTypes.BIGINT,
     allowNull: false,
     validate:{
-        isInt
+        isInt:true
     }
   },
   lote:{
@@ -36,11 +36,30 @@ const Lotes = sequelize.define('Lotes', {
     type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
-        isInt
+        isInt:true
     },
     defaultValue: 0
   },
-  
+  recibidos:{
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+        isInt:true
+    },
+    defaultValue: 0
+  },
+  fechaRegistro:{
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW
+  },
+  codigoBarras:{
+    type: DataTypes.STRING,
+    allowNull:false,
+    validate:{
+        len:[5,25]
+    }
+  }
 });
 
 module.exports = Lotes;

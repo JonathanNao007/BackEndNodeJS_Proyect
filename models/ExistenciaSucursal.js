@@ -11,21 +11,21 @@ const ExistenciaSucursal = sequelize.define('ExistenciaSucursal', {
     type: DataTypes.BIGINT,
     allowNull: false,
     validate:{
-        isInt
+        isInt:true
     }
   },
   idProducto: {
     type: DataTypes.BIGINT,
     allowNull: false,
     validate:{
-        isInt
+        isInt:true
     }
   },
   existencia: {
     type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
-        isInt
+        isInt:true
     },
     defaultValue: 0
   },
@@ -33,7 +33,7 @@ const ExistenciaSucursal = sequelize.define('ExistenciaSucursal', {
     type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
-        isInt
+        isInt:true
     },
     defaultValue: 0
   },
@@ -41,14 +41,14 @@ const ExistenciaSucursal = sequelize.define('ExistenciaSucursal', {
     type: DataTypes.BIGINT,
     allowNull: false,
     validate:{
-        isInt
+        isInt:true
     }
   },
   codigoBarras:{
     type: DataTypes.STRING,
     allowNull:false,
     validate:{
-        len:[5,20]
+        len:[5,25]
     }
   }
 });
