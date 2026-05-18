@@ -5,6 +5,14 @@ const routes = require('./routes/authRoutes');
 const { connectDB } = require('./database/db');
 const path = require('node:path');
 const FRONTEND_DIR = path.join(__dirname, './frontend');
+//Modelos
+const User = require('./models/User');
+const Lotes = require('./models/Lotes');
+const ExistenciaSucursal = require('./models/ExistenciaSucursal');
+const Movimientos = require('./models/Movimientos');
+const Movimientosdetalle = require('./models/Movimientosdetalle');
+const Productos = require('./models/Productos');
+//
 dotenv.config();
 
 const app = express();
