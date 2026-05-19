@@ -5,7 +5,8 @@ const {
   register,
   login,
   getProfile,
-  getUsers
+  getUsers,
+  updateUser
 } = require('../controllers/authController');
 const { protect, authorize } = require('../middleware/auth');
 
@@ -17,5 +18,6 @@ router.post('/auth/login', login);
 // Rutas privadas
 router.get('/auth/profile', protect, getProfile);
 router.get('/auth/users', protect, authorize('admin'), getUsers);
+router.put('/auth/users/:id', protect, authorize('admin'), updateUser);
 
 module.exports = router;

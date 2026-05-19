@@ -26,6 +26,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>Apellidos</th>
                     <th>Email</th>
                     <th>Rol</th>
                     <th>Estado</th>
@@ -51,28 +52,32 @@
         <form id="userForm">
             <input type="hidden" id="userId">
             <div class="input-group">
-                <label for="userName">Nombre completo</label>
-                <input type="text" id="userName" name="name" required>
+                <label for="userNameMD">Nombre</label>
+                <input type="text" id="userNameMD" name="name" required>
             </div>
             <div class="input-group">
-                <label for="userEmail">Correo electrónico</label>
-                <input type="email" id="userEmail" name="email" required>
+                <label for="userLastNameMD">Apellidos</label>
+                <input type="text" id="userLastNameMD" name="lastName" required>
+            </div>
+            <div class="input-group">
+                <label for="userEmailMD">Correo electrónico</label>
+                <input type="email" id="userEmailMD" name="email" required>
             </div>
             <div class="input-group" id="passwordField">
-                <label for="userPassword">Contraseña</label>
-                <input type="password" id="userPassword" name="password">
+                <label for="userPasswordMD">Contraseña</label>
+                <input type="password" id="userPasswordMD" name="password">
                 <small id="passwordHelp">Dejar en blanco para mantener la contraseña actual</small>
             </div>
             <div class="input-group">
-                <label for="userRole">Rol</label>
-                <select id="userRole" name="role">
+                <label for="userRoleMD">Rol</label>
+                <select id="userRoleMD" name="role">
                     <option value="user">Usuario</option>
                     <option value="admin">Administrador</option>
                 </select>
             </div>
             <div class="input-group">
-                <label for="userStatus">Estado</label>
-                <select id="userStatus" name="status">
+                <label for="userStatusMD">Estado</label>
+                <select id="userStatusMD" name="status">
                     <option value="true">Activo</option>
                     <option value="false">Inactivo</option>
                 </select>

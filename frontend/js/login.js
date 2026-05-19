@@ -63,7 +63,7 @@ window.initLogin = function() {
     }
     
     // Manejar Registro
-    async function handleRegister(name, email, password) {
+    async function handleRegister(name, lastName, email, password) {
         const registerBtn = document.querySelector('#registerForm button');
         const originalText = registerBtn?.textContent || 'Registrarse';
         
@@ -76,7 +76,7 @@ window.initLogin = function() {
             const response = await fetch(`${API_URL}/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, password })
+                body: JSON.stringify({ name, lastName, email, password })
             });
             
             const data = await response.json();
@@ -122,6 +122,7 @@ window.initLogin = function() {
         newRegisterForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = document.getElementById('regName')?.value;
+            const lastName = document.getElementById('regLastName')?.value;
             const email = document.getElementById('regEmail')?.value;
             const password = document.getElementById('regPassword')?.value;
             
@@ -135,7 +136,7 @@ window.initLogin = function() {
                 return;
             }
             
-            if (name && email && password) await handleRegister(name, email, password);
+            if (name && email && password) await handleRegister(name, lastName, email, password);
         });
     }
     

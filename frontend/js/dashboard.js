@@ -1,3 +1,9 @@
+// Variables globales de inventario
+let productosData = [];
+let existenciasData = [];
+let currentDeleteType = null;
+let currentDeleteId = null;
+
 // Función de inicialización para dashboard
 window.initDashboard = async function() {
     console.log('Inicializando dashboard...');

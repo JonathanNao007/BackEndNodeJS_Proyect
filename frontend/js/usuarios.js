@@ -106,6 +106,7 @@ function displayUsers(users) {
         <tr>
             <td>${user.id}</td>
             <td>${escapeHtml(user.name)}</td>
+            <td>${escapeHtml(user.lastName)}</td>
             <td>${escapeHtml(user.email)}</td>
             <td><span class="badge ${user.role === 'admin' ? 'badge-admin' : 'badge-user'}">${user.role === 'admin' ? 'Administrador' : 'Usuario'}</span></td>
             <td><span class="badge ${user.isActive ? 'badge-active' : 'badge-inactive'}">${user.isActive ? 'Activo' : 'Inactivo'}</span></td>
@@ -124,9 +125,9 @@ function openAddUserModal() {
     document.getElementById('modalTitle').textContent = 'Agregar Usuario';
     document.getElementById('userForm').reset();
     document.getElementById('userId').value = '';
-    document.getElementById('userPassword').required = true;
+    document.getElementById('userPasswordMD').required = true;
     document.getElementById('passwordHelp').style.display = 'block';
-    document.getElementById('userStatus').value = 'true';
+    document.getElementById('userStatusMD').value = 'true';
     document.getElementById('userModal').style.display = 'block';
 }
 
@@ -150,12 +151,13 @@ window.editUser = async function(userId) {
             if (user) {
                 document.getElementById('modalTitle').textContent = 'Editar Usuario';
                 document.getElementById('userId').value = user.id;
-                document.getElementById('userName').value = user.name;
-                document.getElementById('userEmail').value = user.email;
-                document.getElementById('userRole').value = user.role;
-                document.getElementById('userStatus').value = user.isActive.toString();
-                document.getElementById('userPassword').required = false;
-                document.getElementById('userPassword').value = '';
+                document.getElementById('userNameMD').value = user.name;
+                document.getElementById('userLastNameMD').value = user.lastName;
+                document.getElementById('userEmailMD').value = user.email;
+                document.getElementById('userRoleMD').value = user.role;
+                document.getElementById('userStatusMD').value = user.isActive.toString();
+                document.getElementById('userPasswordMD').required = false;
+                document.getElementById('userPasswordMD').value = '';
                 document.getElementById('passwordHelp').style.display = 'block';
                 document.getElementById('userModal').style.display = 'block';
             }
@@ -214,13 +216,14 @@ async function saveUser(event) {
     const token = getToken();
     const userId = document.getElementById('userId').value;
     const userData = {
-        name: document.getElementById('userName').value,
-        email: document.getElementById('userEmail').value,
-        role: document.getElementById('userRole').value,
-        isActive: document.getElementById('userStatus').value === 'true'
+        name: document.getElementById('userNameMD').value,
+        lastName: document.getElementById('userLastNameMD').value,
+        email: document.getElementById('userEmailMD').value,
+        role: document.getElementById('userRoleMD').value,
+        isActive: document.getElementById('userStatusMD').value === 'true'
     };
     
-    const password = document.getElementById('userPassword').value;
+    const password = document.getElementById('userPasswordMD').value;
     if (password) {
         userData.password = password;
     }

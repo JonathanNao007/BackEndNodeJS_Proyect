@@ -190,10 +190,55 @@ const getUsers = async (req, res) => {
   }
 };
 
+// @desc    Update user
+// @route   PUT /api/auth/users/:id
+// @access  Private/Admin
+const updateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, email, role, isActive, password } = req.body;
+    
+    const user = await User.findByPk(id);
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuario no encontrado'
+      });
+    }
+    
+    // Actualizar campos
+    if (name) user.name = name;
+    if (email) user.email = email;
+    if (role) user.role = role;
+    if (isActive !== undefined) user.isActive = isActive;
+    if (password) user.password = password;
+    
+    await user.save();
+    
+    // Obtener usuario actualizado sin contraseña
+    const updatedUser = await User.findByPk(id, {
+      attributes: { exclude: ['password'] }
+    });
+    
+    res.status(200).json({
+      success: true,
+      user: updatedUser
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: 'Error al actualizar usuario'
+    });
+  }
+};
+
 module.exports = {
   home,
   register,
   login,
   getProfile,
-  getUsers
+  getUsers,
+  updateUser
 };

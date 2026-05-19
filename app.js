@@ -16,9 +16,12 @@ const Productos = require('./models/Productos');
 dotenv.config();
 
 const app = express();
+const allowedOrigins = process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : [];
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin:{allowedOrigins}
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
