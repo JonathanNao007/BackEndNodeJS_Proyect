@@ -12,16 +12,16 @@ const sequelize = new Sequelize(
     port: process.env.DB_PORT,
     dialect: 'mysql',
     //Comentar dialectOptions si es local y no en digital ocean
-    // dialectOptions: {
-    //   ssl: {
-    //     // Required for DigitalOcean managed databases
-    //     require: true,
-    //     // Path to the CA certificate downloaded from DigitalOcean
-    //     ca: fs.readFileSync(path.join('D:\\Proyectos\\CursoTecMilenio\\BackEndConNodeJS', 'ca-certificate.crt')),
-    //     // Optional: set to true to verify the server's certificate against the CA
-    //     rejectUnauthorized: true 
-    //   }
-    // },
+    dialectOptions: {
+      ssl: {
+        // Required for DigitalOcean managed databases
+        require: true,
+        // Path to the CA certificate downloaded from DigitalOcean
+        ca: fs.readFileSync(path.join('D:\\Proyectos\\CursoTecMilenio\\BackEndConNodeJS', 'ca-certificate.crt')),
+        // Optional: set to true to verify the server's certificate against the CA
+        rejectUnauthorized: true 
+      }
+    },
     // Optional: connection pool settings for better performance
     pool: {
       max: 5,
@@ -38,10 +38,10 @@ async function crearBaseSiNoExiste() {
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
     //Comentar ssl si es local y no en digital ocean
-    // ssl:{
-    //   require:true,
-    //   ca: fs.readFileSync(path.join('D:\\Proyectos\\CursoTecMilenio\\BackEndConNodeJS', 'ca-certificate.crt')),
-    // }
+    ssl:{
+      require:true,
+      ca: fs.readFileSync(path.join('D:\\Proyectos\\CursoTecMilenio\\BackEndConNodeJS', 'ca-certificate.crt')),
+    }
   });
 
   await connection.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME};`);
