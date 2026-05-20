@@ -1,0 +1,331 @@
+<div class="dashboard-container fade-in">
+    <div class="dashboard-header">
+        <div class="user-info">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#4A90E2"/>
+            </svg>
+            <div>
+                <h3 id="userName"></h3>
+                <p id="userEmail"></p>
+            </div>
+        </div>
+        <div class="header-buttons">
+            <button id="showDashboardBtn" class="btn-secondary">🏠 Inicio</button>
+            <button id="logoutBtn" class="btn-logout">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <div class="users-header">
+        <h2>Gestión de Inventarios</h2>
+    </div>
+
+    <!-- Vista de Inventarios (NUEVA) -->
+    <div class="dashboard-view" id="inventarioView">
+        <!-- Sub-tabs de inventario -->
+        <div class="sub-tabs">
+            <button class="sub-tab-btn active" data-subtab="productos">📦 Productos</button>
+            <button class="sub-tab-btn" data-subtab="existencias">📊 Existencias</button>
+            <button class="sub-tab-btn" data-subtab="lotes">🏷️ Lotes</button>
+            <button class="sub-tab-btn" data-subtab="resumen">📈 Resumen</button>
+        </div>
+
+        <!-- Sub-tab: Productos -->
+        <div id="subtabProductos" class="subtab-content active">
+            <div class="section-header">
+                <h2>Catálogo de Productos</h2>
+                <!-- <button id="addProductoBtn" class="btn-primary btn-small">+ Nuevo Producto</button> -->
+            </div>
+            <div class="filtros">
+                <input type="text" id="filtroProducto" placeholder="Buscar por nombre, SKU o código..." class="filtro-input">
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th><th>Clave</th><th>Código Barras</th><th>Descripción</th>
+                            <th>SKU</th><th>Existencia</th><th>Precio</th><th>Estado</th><th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productosTableBody">...</tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sub-tab: Existencias -->
+        <div id="subtabExistencias" class="subtab-content" style="display: none;">
+            <div class="section-header">
+                <h2>Existencias por Sucursal</h2>
+            </div>
+            <div class="filtros">
+                <select id="filtroSucursalExistencia" class="filtro-select">
+                    <option value="">Todas las sucursales</option>
+                    <option value="1">Principal</option>
+                    <option value="2">Norte</option>
+                    <option value="3">Sur</option>
+                </select>
+                <input type="text" id="filtroExistencia" placeholder="Buscar producto..." class="filtro-input">
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>ID</th><th>Clave</th><th>Producto</th><th>Existencia</th><th>Disponible</th><th>Estado</th><th>Acciones</th></tr>
+                    </thead>
+                    <tbody id="existenciasTableBody">...</tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sub-tab: Lotes -->
+        <div id="subtabLotes" class="subtab-content" style="display: none;">
+            <div class="section-header">
+                <h2>Gestión de Lotes</h2>
+                <div class="search-group">
+                    <select id="productoSelectLote" class="select-input">
+                        <option value="">Seleccionar producto</option>
+                    </select>
+                    <button id="addLoteBtn" class="btn-primary btn-small">+ Agregar Lote</button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>ID</th><th>N° Lote</th><th>Existencia</th><th>Caducidad</th><th>Días</th><th>Estado</th><th>Acciones</th></tr>
+                    </thead>
+                    <tbody id="lotesTableBody">...</tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sub-tab: Resumen -->
+        <div id="subtabResumen" class="subtab-content" style="display: none;">
+            <div class="resumen-cards">
+                <div class="resumen-card"><div class="card-icon">📦</div><div class="card-info"><h3>Total Productos</h3><p id="totalProductos">0</p></div></div>
+                <div class="resumen-card"><div class="card-icon">📊</div><div class="card-info"><h3>Existencia Total</h3><p id="totalExistencia">0</p></div></div>
+                <div class="resumen-card"><div class="card-icon">💰</div><div class="card-info"><h3>Valor Inventario</h3><p id="valorInventario">$0.00</p></div></div>
+            </div>
+            <div class="resumen-seccion"><h3>⚠️ Productos con Bajo Stock</h3><div class="table-container"><table class="data-table"><thead><tr><th>Producto</th><th>Existencia</th><th>Stock Mínimo</th></tr></thead><tbody id="bajoStockTableBody">...</tbody></table></div></div>
+            <div class="resumen-seccion"><h3>⏰ Lotes por Vencer</h3><div class="table-container"><table class="data-table"><thead><tr><th>Producto</th><th>Lote</th><th>Caducidad</th><th>Días</th></tr></thead><tbody id="lotesVencerTableBody">...</tbody></table></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- Modales de Inventario -->
+ <!-- ==================== MODALES ==================== -->
+    
+    <!-- Modal Producto -->
+    <div id="productoModal" class="modal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 id="productoModalTitle">Nuevo Producto</h3>
+                <span class="close close-producto">&times;</span>
+            </div>
+            <div class="modal-body overflow-y-auto">
+                <form id="productoForm">
+                    <input type="hidden" id="productoId">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Clave Producto *</label>
+                            <input type="number" id="prodClave" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Código Barras *</label>
+                            <input type="text" id="prodCodigoBarras" required maxlength="25">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>SKU *</label>
+                            <input type="text" id="prodSKU" required maxlength="25">
+                        </div>
+                        <div class="input-group">
+                            <label>SKU Fabricante *</label>
+                            <input type="text" id="prodSKUFabricante" required maxlength="25">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>UPC/EAN *</label>
+                            <input type="text" id="prodUpcEan" required maxlength="25">
+                        </div>
+                        <div class="input-group">
+                            <label>Unidad *</label>
+                            <input type="text" id="prodUnidad" required maxlength="100">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Descripción *</label>
+                        <textarea id="prodDescripcion" rows="2" required maxlength="500"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Categoría</label>
+                                <select id="prodCategoria">
+                                <option value="1">Antibióticos</option>
+                                <option value="2">Bebidas</option>
+                                <option value="3">Botica y material de curación</option>
+                                <option value="4">Complementos y Suplmentos</option>
+                                <option value="5">Cosméticos</option>
+                                <option value="6">Ciudado de la piel</option>
+                                <option value="7">Cuidado de manos y pies</option>
+                                <option value="8">Cuidado de cabello</option>
+                                <option value="9">Dispositivos y equipo medico</option>
+                                <option value="10">Fracción V</option>
+                                <option value="11">Herbolarios</option>
+                                <option value="12">Higiene bucal</option>
+                                <option value="13">Higiene corporal</option>
+                                <option value="14">Mamá y bebé</option>
+                                <option value="15">Fracción VI</option>
+                                <option value="16">Otros</option>
+                                <option value="17">Pareja</option>
+                                <option value="18">Fracción IV</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Sucursal</label>
+                            <select id="prodSucursal">
+                                <option value="1">Principal</option>
+                                <option value="2">Norte</option>
+                                <option value="3">Sur</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Precio Venta *</label>
+                            <input type="number" step="0.01" id="prodPrecioVenta" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Costo *</label>
+                            <input type="number" step="0.01" id="prodCosto" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Utilidad (%)</label>
+                            <input type="number" id="prodUtilidad" value="1">
+                        </div>
+                        <div class="input-group">
+                            <label>Stock Mínimo</label>
+                            <input type="number" step="0.01" id="prodMinStock" value="0">
+                        </div>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn-secondary" id="cancelProductoBtn">Cancelar</button>
+                        <button type="submit" class="btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>            
+        </div>
+    </div>
+
+    <!-- Modal Existencia -->
+    <div id="existenciaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Actualizar Existencia</h3>
+                <span class="close close-existencia">&times;</span>
+            </div>
+            <form id="existenciaForm">
+                <input type="hidden" id="existenciaId">
+                <div class="input-group">
+                    <label>Producto</label>
+                    <input type="text" id="existenciaProducto" readonly>
+                </div>
+                <div class="input-group">
+                    <label>Clave Producto</label>
+                    <input type="text" id="existenciaClave" readonly>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Existencia Actual</label>
+                        <input type="number" id="existenciaCantidad" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label>Por Entregar</label>
+                        <input type="number" id="existenciaPorEntregar" required min="0">
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-secondary" id="cancelExistenciaBtn">Cancelar</button>
+                    <button type="submit" class="btn-primary">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Lote -->
+    <div id="loteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="loteModalTitle">Agregar Lote</h3>
+                <span class="close close-lote">&times;</span>
+            </div>
+            <form id="loteForm">
+                <input type="hidden" id="loteId">
+                <input type="hidden" id="loteClaveProducto">
+                <div class="input-group">
+                    <label>Producto Seleccionado</label>
+                    <input type="text" id="loteProductoNombre" readonly>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Número de Lote *</label>
+                        <input type="text" id="loteNumero" required maxlength="200">
+                    </div>
+                    <div class="input-group">
+                        <label>Sucursal</label>
+                        <select id="loteSucursal">
+                            <option value="1">Principal</option>
+                            <option value="2">Norte</option>
+                            <option value="3">Sur</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Cantidad *</label>
+                        <input type="number" id="loteCantidad" required min="1">
+                    </div>
+                    <div class="input-group">
+                        <label>Recibidos</label>
+                        <input type="number" id="loteRecibidos" min="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Fecha Caducidad *</label>
+                        <input type="date" id="loteCaducidad" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Código Barras</label>
+                        <input type="text" id="loteCodigoBarras" maxlength="25">
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-secondary" id="cancelLoteBtn">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar Lote</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Confirmación Eliminar -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content delete-modal">
+            <div class="modal-header">
+                <h3>Confirmar Eliminación</h3>
+                <span class="close close-delete">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar este registro?</p>
+                <p id="deleteMessage"></p>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" class="btn-secondary" id="cancelDeleteBtn">Cancelar</button>
+                <button type="button" class="btn-danger" id="confirmDeleteBtn">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+
+<div class="toast" id="toast"><span id="toastMessage"></span></div>

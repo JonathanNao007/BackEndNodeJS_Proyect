@@ -21,6 +21,7 @@
     overflow-x: auto;
     border-radius: 12px;
     border: 1px solid #E3F2FD;
+    height: 500px;
 }
 
 .users-table {
@@ -144,7 +145,10 @@
     border-radius: 20px;
     width: 90%;
     max-width: 500px;
+    height: 70%;
+    max-height: 800px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
 }
 
 .delete-modal {

@@ -4,6 +4,12 @@ const API_URL = 'http://localhost:3000/api';
 // Variables globales
 let currentUser = null;
 let currentUserRole = null;
+//
+// Variables globales de inventario
+let productosData = [];
+let existenciasData = [];
+let currentDeleteType = null;
+let currentDeleteId = null;
 
 // Mostrar notificaciones
 function showToast(message, type = 'success') {
@@ -88,6 +94,8 @@ async function loadPage(pageName) {
                 window.initDashboard();
             } else if (pageName === 'usuarios' && typeof window.initUsuarios === 'function') {
                 window.initUsuarios();
+            } else if (pageName === 'inventario' && typeof window.initInventarios === 'function') {
+                window.initInventarios();
             }
         };
         script.onerror = () => {

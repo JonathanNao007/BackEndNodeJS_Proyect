@@ -234,11 +234,51 @@ const updateUser = async (req, res) => {
   }
 };
 
+// @desc    Delete user
+// @route   DELETE /api/auth/users/:id
+// @access  Private/Admin
+const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // No permitir eliminar el propio usuario
+    if (parseInt(id) === req.user.id) {
+      return res.status(400).json({
+        success: false,
+        message: 'No puedes eliminar tu propio usuario'
+      });
+    }
+    
+    const user = await User.findByPk(id);
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuario no encontrado'
+      });
+    }
+    
+    await user.destroy();
+    
+    res.status(200).json({
+      success: true,
+      message: 'Usuario eliminado correctamente'
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: 'Error al eliminar usuario'
+    });
+  }
+};
+
 module.exports = {
   home,
   register,
   login,
   getProfile,
   getUsers,
-  updateUser
+  updateUser,
+  deleteUser
 };

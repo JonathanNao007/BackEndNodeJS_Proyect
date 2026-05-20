@@ -1,7 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+// Archivps de rutas
 const routes = require('./routes/authRoutes');
+const inventarioRoutes = require('./routes/inventarioRoutes');
+//
 const { connectDB } = require('./database/db');
 const path = require('node:path');
 const FRONTEND_DIR = path.join(__dirname, './frontend');
@@ -31,6 +34,7 @@ connectDB();
 app.use(express.static(FRONTEND_DIR));
 // Rutas
 app.use('/api', routes);
+app.use('/api/inventario', inventarioRoutes);
 //
 app.get('/', (req, res) => {
   res.sendFile(path.join(FRONTEND_DIR, 'index.html'));

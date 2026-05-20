@@ -1,13 +1,8 @@
-// Variables globales de inventario
-let productosData = [];
-let existenciasData = [];
-let currentDeleteType = null;
-let currentDeleteId = null;
 
 // Función de inicialización para dashboard
 window.initDashboard = async function() {
     console.log('Inicializando dashboard...');
-    
+
     // Actualizar información del usuario
     if (currentUser) {
         const userNameElem = document.getElementById('userName');
@@ -32,6 +27,14 @@ window.initDashboard = async function() {
     const showDashboardBtn = document.getElementById('showDashboardBtn');
     const logoutBtn = document.getElementById('logoutBtn');
     
+    if (showInventarioBtn) {
+        const newShowInventarioBtn = showInventarioBtn.cloneNode(true);
+        showInventarioBtn.parentNode.replaceChild(newShowInventarioBtn, showInventarioBtn);
+        newShowInventarioBtn.addEventListener('click', async () => {
+            await loadPage('inventario');
+        });
+    }
+
     if (showUsersBtn) {
         const newShowUsersBtn = showUsersBtn.cloneNode(true);
         showUsersBtn.parentNode.replaceChild(newShowUsersBtn, showUsersBtn);

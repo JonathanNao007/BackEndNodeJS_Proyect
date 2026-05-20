@@ -62,4 +62,5 @@ const Lotes = sequelize.define('Lotes', {
   }
 });
 
+
 module.exports = Lotes;
