@@ -1,5 +1,6 @@
 // Configuración de la API
-const API_URL = 'http://localhost:3000/api';
+//const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://plankton-app-xkoxw.ondigitalocean.app/api';
 
 // Variables globales
 let currentUser = null;
