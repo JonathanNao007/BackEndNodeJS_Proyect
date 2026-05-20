@@ -17,7 +17,7 @@ const sequelize = new Sequelize(
         // Required for DigitalOcean managed databases
         require: true,
         // Path to the CA certificate downloaded from DigitalOcean
-        ca: fs.readFileSync(path.join('D:\\Proyectos\\CursoTecMilenio\\BackEndConNodeJS', 'ca-certificate.crt')),
+        ca: fs.readFileSync(path.join(__dirname, 'ca-certificate.crt')),
         // Optional: set to true to verify the server's certificate against the CA
         rejectUnauthorized: true 
       }
@@ -40,7 +40,7 @@ async function crearBaseSiNoExiste() {
     //Comentar ssl si es local y no en digital ocean
     ssl:{
       require:true,
-      ca: fs.readFileSync(path.join('D:\\Proyectos\\CursoTecMilenio\\BackEndConNodeJS', 'ca-certificate.crt')),
+      ca: fs.readFileSync(path.join(__dirname, 'ca-certificate.crt')),
     }
   });
 
