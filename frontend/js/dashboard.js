@@ -26,7 +26,16 @@ window.initDashboard = async function() {
     const showUsersBtn = document.getElementById('showUsersBtn');
     const showDashboardBtn = document.getElementById('showDashboardBtn');
     const logoutBtn = document.getElementById('logoutBtn');
+    const showMovimientosBtn =  document.getElementById('showMovimientosBtn');
     
+    if (showMovimientosBtn) {
+        const newshowMovimientosBtn = showMovimientosBtn.cloneNode(true);
+        showMovimientosBtn.parentNode.replaceChild(newshowMovimientosBtn, showMovimientosBtn);
+        newshowMovimientosBtn.addEventListener('click', async () => {
+            await loadPage('movimientos');
+        });
+    }
+
     if (showInventarioBtn) {
         const newShowInventarioBtn = showInventarioBtn.cloneNode(true);
         showInventarioBtn.parentNode.replaceChild(newShowInventarioBtn, showInventarioBtn);

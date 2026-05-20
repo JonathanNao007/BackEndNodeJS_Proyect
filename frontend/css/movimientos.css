@@ -1,0 +1,99 @@
+/* ==================== ESTILOS PARA MOVIMIENTOS ==================== */
+
+.movimientos-view {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Detalle header */
+.detalle-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: #F5F9FF;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.detalle-info p {
+    margin: 8px 0;
+    color: #42A5F5;
+    font-size: 14px;
+}
+
+.detalle-info strong {
+    color: #1976D2;
+}
+
+.total-valor {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1976D2;
+}
+
+/* Productos en movimiento */
+.producto-row {
+    background: #F5F9FF;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-remove-producto {
+    margin-top: 24px;
+}
+
+/* Badges para tipos de movimiento */
+.badge-entrada {
+    background: #E8F5E9;
+    color: #4CAF50;
+}
+
+.badge-salida {
+    background: #FFEBEE;
+    color: #EF5350;
+}
+
+.badge-traspaso {
+    background: #E3F2FD;
+    color: #2196F3;
+}
+
+.badge-ajuste {
+    background: #FFF3E0;
+    color: #FF9800;
+}
+
+.badge-devolucion {
+    background: #F3E5F5;
+    color: #9C27B0;
+}
+
+/* Select2 personalizado */
+.producto-select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #E3F2FD;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.producto-select:focus {
+    border-color: #42A5F5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .detalle-header {
+        grid-template-columns: 1fr;
+    }
+    
+    .producto-row .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn-remove-producto {
+        margin-top: 0;
+    }
+}

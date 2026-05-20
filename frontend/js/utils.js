@@ -11,6 +11,10 @@ let productosData = [];
 let existenciasData = [];
 let currentDeleteType = null;
 let currentDeleteId = null;
+// Variables globales movimientos
+let movimientosData = [];
+let productosDisponibles = [];
+let productosSeleccionados = [];
 
 // Mostrar notificaciones
 function showToast(message, type = 'success') {
@@ -97,6 +101,8 @@ async function loadPage(pageName) {
                 window.initUsuarios();
             } else if (pageName === 'inventario' && typeof window.initInventarios === 'function') {
                 window.initInventarios();
+            } else if (pageName === 'movimientos' && typeof window.initMMovimientos === 'function') {
+                window.initMMovimientos();
             }
         };
         script.onerror = () => {

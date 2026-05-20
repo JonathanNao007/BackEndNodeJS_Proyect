@@ -11,7 +11,7 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'mysql',
-    //Comentar dialectOptions si es local y no en digital ocean
+    ////Comentar dialectOptions si es local y no en digital ocean
     dialectOptions: {
       ssl: {
         // Required for DigitalOcean managed databases
@@ -22,7 +22,7 @@ const sequelize = new Sequelize(
         rejectUnauthorized: true 
       }
     },
-    // Optional: connection pool settings for better performance
+    //// Optional: connection pool settings for better performance
     pool: {
       max: 5,
       min: 0,
@@ -37,7 +37,7 @@ async function crearBaseSiNoExiste() {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
-    //Comentar ssl si es local y no en digital ocean
+    ////Comentar ssl si es local y no en digital ocean
     ssl:{
       require:true,
       ca: fs.readFileSync(path.join(__dirname, 'ca-certificate.crt')),

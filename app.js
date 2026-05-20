@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 // Archivps de rutas
 const routes = require('./routes/authRoutes');
 const inventarioRoutes = require('./routes/inventarioRoutes');
+const movimientosRoutes = require('./routes/movimientosRoutes');
 //
 const { connectDB } = require('./database/db');
 const path = require('node:path');
@@ -35,6 +36,7 @@ app.use(express.static(FRONTEND_DIR));
 // Rutas
 app.use('/api', routes);
 app.use('/api/inventario', inventarioRoutes);
+app.use('/api/movimientos', movimientosRoutes);
 //
 app.get('/', (req, res) => {
   res.sendFile(path.join(FRONTEND_DIR, 'index.html'));

@@ -1,0 +1,228 @@
+<div class="dashboard-container fade-in">
+    <div class="dashboard-header">
+        <div class="user-info">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#4A90E2"/>
+            </svg>
+            <div>
+                <h3 id="userName"></h3>
+                <p id="userEmail"></p>
+            </div>
+        </div>
+        <div class="header-buttons">
+            <button id="showDashboardBtn" class="btn-secondary">🏠 Inicio</button>
+            <button id="logoutBtn" class="btn-logout">Cerrar Sesión</button>
+        </div>
+    </div>
+    
+    <div id="movimientosContent">
+        <!-- Vista de lista de movimientos -->
+        <div class="movimientos-view" id="listaMovimientosView">
+            <div class="section-header">
+                <h2>📋 Movimientos de Inventario</h2>
+                <button id="nuevoMovimientoBtn" class="btn-primary">+ Nuevo Movimiento</button>
+            </div>
+            
+            <!-- Tarjetas de resumen -->
+            <div class="resumen-cards">
+                <div class="resumen-card">
+                    <div class="card-icon">📅</div>
+                    <div class="card-info">
+                        <h3>Movimientos Hoy</h3>
+                        <p id="movimientosHoy">0</p>
+                    </div>
+                </div>
+                <div class="resumen-card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-info">
+                        <h3>Esta Semana</h3>
+                        <p id="movimientosSemana">0</p>
+                    </div>
+                </div>
+                <div class="resumen-card">
+                    <div class="card-icon">📈</div>
+                    <div class="card-info">
+                        <h3>Este Mes</h3>
+                        <p id="movimientosMes">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filtros -->
+            <div class="filtros">
+                <select id="filtroTipo" class="filtro-select">
+                    <option value="">Todos los tipos</option>
+                    <option value="ENTRADA">Entrada</option>
+                    <option value="SALIDA">Salida</option>
+                    <option value="TRASPASO">Traspaso</option>
+                    <option value="AJUSTE">Ajuste</option>
+                    <option value="DEVOLUCION">Devolución</option>
+                </select>
+                <input type="date" id="filtroFechaInicio" class="filtro-input" placeholder="Fecha inicio">
+                <input type="date" id="filtroFechaFin" class="filtro-input" placeholder="Fecha fin">
+                <button id="buscarMovimientosBtn" class="btn-secondary">🔍 Buscar</button>
+                <button id="limpiarFiltrosBtn" class="btn-secondary">🗑️ Limpiar</button>
+            </div>
+            
+            <!-- Tabla de movimientos -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Tipo</th>
+                            <th>Referencia</th>
+                            <th>Productos</th>
+                            <th>Total</th>
+                            <th>Usuario</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="movimientosTableBody">
+                        <tr><td colspan="8" class="loading-text">Cargando movimientos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Vista de detalles del movimiento -->
+        <div class="movimientos-view" id="detalleMovimientoView" style="display: none;">
+            <div class="section-header">
+                <button id="volverListaBtn" class="btn-secondary">← Volver</button>
+                <h2>Detalle del Movimiento</h2>
+                <div></div>
+            </div>
+            
+            <div class="detalle-header">
+                <div class="detalle-info">
+                    <p><strong>ID Movimiento:</strong> <span id="detalleId"></span></p>
+                    <p><strong>Fecha:</strong> <span id="detalleFecha"></span></p>
+                    <p><strong>Tipo:</strong> <span id="detalleTipo" class="badge"></span></p>
+                    <p><strong>Referencia:</strong> <span id="detalleReferencia"></span></p>
+                </div>
+                <div class="detalle-info">
+                    <p><strong>ID Usuario:</strong> <span id="detalleIdUsuario"></span></p>
+                    <p><strong>Sucursal:</strong> <span id="detalleSucursal"></span></p>
+                    <p><strong>Total Productos:</strong> <span id="detalleTotalProductos"></span></p>
+                    <p><strong>Valor Total:</strong> <span id="detalleValorTotal" class="total-valor"></span></p>
+                </div>
+            </div>
+            
+            <h3>Productos del Movimiento</h3>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID Producto</th>
+                            <th>Clave</th>
+                            <th>Código Barras</th>
+                            <th>Descripción</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detalleTableBody">
+                        <tr><td colspan="7" class="loading-text">Cargando detalles...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nuevo Movimiento -->
+<div id="movimientoModal" class="modal">
+    <div class="modal-content modal-lg">
+        <div class="modal-header">
+            <h3>Nuevo Movimiento</h3>
+            <span class="close close-movimiento">&times;</span>
+        </div>
+        <form id="movimientoForm">
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Tipo de Movimiento *</label>
+                    <select id="movTipo" required>
+                        <option value="">Seleccionar</option>
+                        <option value="ENTRADA">Entrada de Inventario</option>
+                        <option value="SALIDA">Salida de Inventario</option>
+                        <option value="TRASPASO">Traspaso entre Sucursales</option>
+                        <option value="AJUSTE">Ajuste de Inventario</option>
+                        <option value="DEVOLUCION">Devolución</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Referencia *</label>
+                    <input type="text" id="movReferencia" required maxlength="50">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Sucursal</label>
+                    <select id="movSucursal">
+                        <option value="1">Principal</option>
+                        <option value="2">Norte</option>
+                        <option value="3">Sur</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>ID Pedido (opcional)</label>
+                    <input type="number" id="movIdPedido">
+                </div>
+            </div>
+            
+            <h3>Productos del Movimiento</h3>
+            <div id="productosMovimiento">
+                <div class="producto-row">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Buscar Producto</label>
+                            <select class="producto-select" style="width: 100%">
+                                <option value="">Seleccionar producto...</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Cantidad</label>
+                            <input type="number" class="producto-cantidad" value="1" min="1">
+                        </div>
+                        <div class="input-group">
+                            <label>Acción</label>
+                            <button type="button" class="btn-remove-producto btn-danger" style="padding: 8px">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="button" id="agregarProductoBtn" class="btn-secondary" style="margin-bottom: 15px;">+ Agregar Producto</button>
+            
+            <div class="modal-buttons">
+                <button type="button" class="btn-secondary" id="cancelMovimientoBtn">Cancelar</button>
+                <button type="submit" class="btn-primary">Guardar Movimiento</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Confirmación -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content delete-modal">
+        <div class="modal-header">
+            <h3>Confirmar</h3>
+            <span class="close close-delete">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p id="deleteMessage"></p>
+        </div>
+        <div class="modal-buttons">
+            <button type="button" class="btn-secondary" id="cancelDeleteBtn">Cancelar</button>
+            <button type="button" class="btn-danger" id="confirmDeleteBtn">Confirmar</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast">
+    <span id="toastMessage"></span>
+</div>
+
+<!-- <script src="../js/movimientos.js"></script> -->
