@@ -55,7 +55,8 @@ const connectDB = async () => {
     
     // Sincronizar modelos
     console.log(sequelize.models);
-    await sequelize.sync({ alter: true });
+    ////Sincronizacion de modelos con la base de datos.
+    //await sequelize.sync({ alter: true });
     console.log('✅ Models synchronized');
   } catch (error) {
     console.error('❌ Unable to connect to MySQL:', error);

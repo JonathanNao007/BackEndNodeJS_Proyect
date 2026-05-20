@@ -415,6 +415,7 @@ async function saveExistencia(event) {
 
 // ==================== CRUD LOTES ====================
 function openLoteModal() {
+    const loteModalOP = document.getElementById('loteModal');
     const productoSelect = document.getElementById('productoSelectLote');
     const selectedProducto = productoSelect.value;
     
@@ -429,11 +430,12 @@ function openLoteModal() {
         document.getElementById('loteProductoNombre').value = producto.descripcion;
         document.getElementById('loteCodigoBarras').value = producto.codigoBarras;
     }
-    
-    document.getElementById('loteForm').reset();
-    document.getElementById('loteModalTitle').textContent = 'Agregar Lote';
-    document.getElementById('loteId').value = '';
-    document.getElementById('loteModal').style.display = 'block';
+    else{
+        document.getElementById('loteForm').reset();
+        document.getElementById('loteModalTitle').textContent = 'Agregar Lote';
+        document.getElementById('loteId').value = '';
+    }
+    loteModalOP.style.display = 'block';
 }
 
 async function saveLote(event) {
